@@ -83,9 +83,11 @@ public class pvpLogic implements Initializable {
     public void setPlayerSymbol(Button button) {
         if (playerTurn % 2 == 0) {
             button.setText("X");
+            button.setStyle("-fx-text-fill: blue;");
             playerTurn++;
         } else {
             button.setText("O");
+            button.setStyle("-fx-text-fill: red;");
             playerTurn--;
         }
     }

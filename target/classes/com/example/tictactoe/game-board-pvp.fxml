@@ -10,18 +10,45 @@
    <children>
       <FlowPane alignment="CENTER" layoutX="251.0" layoutY="151.0" prefHeight="300.0" prefWidth="300.0">
          <children>
-            <Button fx:id="button00" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button01" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button02" layoutX="60.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button10" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button11" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button12" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button20" layoutX="210.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button21" layoutX="210.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
-            <Button fx:id="button22" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" />
+            <Button fx:id="button00" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button01" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button02" layoutX="60.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button10" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button11" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button12" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button20" layoutX="210.0" layoutY="60.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button21" layoutX="210.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
+            <Button fx:id="button22" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0">
+               <font>
+                  <Font name="System Bold" size="45.0" />
+               </font></Button>
          </children>
       </FlowPane>
-      <Text fx:id="winnerText" accessibleText="winnerText" layoutX="231.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kółko i krzyżyk" wrappingWidth="340.13671875" textAlignment="CENTER">
+      <Text fx:id="winnerText" accessibleText="winnerText" layoutX="231.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kółko i krzyżyk" textAlignment="CENTER" wrappingWidth="340.13671875">
          <font>
             <Font size="49.0" />
          </font>

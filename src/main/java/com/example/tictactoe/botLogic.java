@@ -52,6 +52,7 @@ public class botLogic implements Initializable {
     private int playerTurn = 0;
     ArrayList<Button> buttons;
     private String difficulty;
+    private boolean gameOver = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resource) {
@@ -71,6 +72,7 @@ public class botLogic implements Initializable {
         buttons.forEach(this::resetButton);
         winnerText.setText("Kółko i krzyżyk");
         playerTurn = 0;
+        gameOver = false;
     }
 
     public void resetButton(Button button) {
@@ -80,23 +82,15 @@ public class botLogic implements Initializable {
 
     private void setupButton(Button button) {
         button.setOnMouseClicked(event -> {
-            setPlayerSymbol(button);
+            setSymbol(button, "X");
             button.setDisable(true);
+            playerTurn++;
             checkWinCondition();
 
-            if (playerTurn % 2 == 1) {
+            if (!gameOver && playerTurn % 2 == 1) {
                 botMove();
             }
         });
-    }
-
-    public void setPlayerSymbol(Button button) {
-        if (playerTurn % 2 == 0) {
-            button.setText("X");
-        } else {
-            button.setText("O");
-        }
-        playerTurn++;
     }
 
     private void botMove() {
@@ -118,7 +112,7 @@ public class botLogic implements Initializable {
         }
         if (!availableButtons.isEmpty()) {
             Button randomButton = availableButtons.get(rand.nextInt(availableButtons.size()));
-            randomButton.setText("O");
+            setSymbol(randomButton, "O");
             randomButton.setDisable(true);
             playerTurn++;
         }
@@ -127,7 +121,7 @@ public class botLogic implements Initializable {
     private void smartMove() {
         for (Button button : buttons) {
             if (button.getText().isEmpty()) {
-                button.setText("O");
+                setSymbol(button, "O");
                 if (checkForWin("O")) {
                     return;
                 }
@@ -138,9 +132,9 @@ public class botLogic implements Initializable {
         // Jeśli nie może wygrać, blokuje gracza
         for (Button button : buttons) {
             if (button.getText().isEmpty()) {
-                button.setText("X");
+                setSymbol(button, "X");
                 if (checkForWin("X")) {
-                    button.setText("O");
+                    setSymbol(button, "O");
                     button.setDisable(true);
                     playerTurn++;
                     return;
@@ -190,10 +184,12 @@ public class botLogic implements Initializable {
             if (check.equals("XXX")) {
                 winnerText.setText("Wygrał krzyżyk");
                 disableAllButtons();
+                gameOver = true;
                 return;
             } else if (check.equals("OOO")) {
                 winnerText.setText("Wygrał bot");
                 disableAllButtons();
+                gameOver = true;
                 return;
             }
 
@@ -203,8 +199,18 @@ public class botLogic implements Initializable {
         if (isDraw) {
             winnerText.setText("Remis");
             disableAllButtons();
+            gameOver = true;
         }
 
+    }
+
+    private void setSymbol(Button button, String symbol) {
+        button.setText(symbol);
+        if (symbol.equals("X")) {
+            button.setStyle("-fx-text-fill: blue;");
+        } else if (symbol.equals("O")) {
+            button.setStyle("-fx-text-fill: red;");
+        }
     }
 
     private void disableAllButtons() {
