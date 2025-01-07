@@ -207,6 +207,7 @@ public class botLogic implements Initializable {
 
     private void disableAllButtons() {
         buttons.forEach(button -> button.setDisable(true));
+        buttons.forEach(button -> button.setStyle("-fx-opacity: 1; -fx-background-color: #C3B091;"));
     }
 
     @FXML

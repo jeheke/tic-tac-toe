@@ -65,6 +65,7 @@ public class pvpLogic implements Initializable {
     void restart(ActionEvent event) {
         buttons.forEach(this::resetButton);
         winnerText.setText("Kółko i krzyżyk");
+        playerTurn = 0;
     }
 
     public void resetButton(Button button) {
@@ -83,11 +84,11 @@ public class pvpLogic implements Initializable {
     public void setPlayerSymbol(Button button) {
         if (playerTurn % 2 == 0) {
             button.setText("X");
-            button.setStyle("-fx-text-fill: blue; -fx-opacity: 1; -fx-background-color: #C3B091; -fx-opacity: 1;");
+            button.setStyle("-fx-text-fill: blue; -fx-opacity: 1; -fx-background-color: #C3B091;");
             playerTurn++;
         } else {
             button.setText("O");
-            button.setStyle("-fx-text-fill: red; -fx-opacity: 1; -fx-background-color: #C3B091; -fx-opacity: 1;");
+            button.setStyle("-fx-text-fill: red; -fx-opacity: 1; -fx-background-color: #C3B091;");
             playerTurn--;
         }
     }
@@ -128,6 +129,7 @@ public class pvpLogic implements Initializable {
 
     private void disableAllButtons() {
         buttons.forEach(button -> button.setDisable(true));
+        buttons.forEach(button -> button.setStyle("-fx-opacity: 1; -fx-background-color: #C3B091;"));
     }
 
 
