@@ -21,31 +21,22 @@ import java.util.Arrays;
 public class botLogic implements Initializable {
     @FXML
     private Button button00;
-
     @FXML
     private Button button01;
-
     @FXML
     private Button button02;
-
     @FXML
     private Button button10;
-
     @FXML
     private Button button11;
-
     @FXML
     private Button button12;
-
     @FXML
     private Button button20;
-
     @FXML
     private Button button21;
-
     @FXML
     private Button button22;
-
     @FXML
     private Text winnerText;
 
@@ -69,6 +60,7 @@ public class botLogic implements Initializable {
 
     @FXML
     void restart(ActionEvent event) {
+        // Resetowanie stanu gry
         buttons.forEach(this::resetButton);
         winnerText.setText("Kółko i krzyżyk");
         playerTurn = 0;
@@ -207,9 +199,9 @@ public class botLogic implements Initializable {
     private void setSymbol(Button button, String symbol) {
         button.setText(symbol);
         if (symbol.equals("X")) {
-            button.setStyle("-fx-text-fill: blue;");
+            button.setStyle("-fx-text-fill: blue; -fx-background-color: #C3B091; -fx-opacity: 1;");
         } else if (symbol.equals("O")) {
-            button.setStyle("-fx-text-fill: red;");
+            button.setStyle("-fx-text-fill: red; -fx-background-color: #C3B091; -fx-opacity: 1;");
         }
     }
 
