@@ -14,6 +14,10 @@ public class Menu extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
         Scene scene = new Scene(loader.load());
 
+        Controller controller = loader.getController();
+        controller.setStage(stage);
+        controller.saveWindowSize();
+
         String css = Objects.requireNonNull(getClass().getResource("style.css")).toExternalForm();
         scene.getStylesheets().add(css);
 

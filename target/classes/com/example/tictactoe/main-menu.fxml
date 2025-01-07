@@ -3,16 +3,15 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactoe.Controller">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="50.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactoe.Controller">
    <children>
-      <HBox alignment="CENTER" layoutY="70.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="430.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="98.0" prefWidth="800.0" text="Kółko i krzyżyk" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="100.0" prefWidth="800.0" text="Kółko i krzyżyk" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
@@ -22,28 +21,25 @@
             </Label>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="295.0" layoutY="250.0" prefHeight="56.0" prefWidth="505.0" AnchorPane.bottomAnchor="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToMode" prefHeight="56.0" prefWidth="210.0" text="Graj">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="295.0" layoutY="350.0" prefHeight="56.0" prefWidth="505.0" AnchorPane.bottomAnchor="189.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="355.0">
+      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
          <children>
-            <Button alignment="CENTER" layoutX="295.0" mnemonicParsing="false" onAction="#switchToScoreboard" prefHeight="56.0" prefWidth="210.0" text="Tabela Wyników">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToScoreboard" prefHeight="56.0" prefWidth="210.0" text="Tabela Wyników">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>
       </HBox>
-      <HBox alignment="CENTER" layoutX="295.0" layoutY="450.0" prefHeight="56.0" prefWidth="505.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="453.0">
+      <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#exit" prefHeight="56.0" prefWidth="210.0" text="Wyjdź">
                <font>
@@ -53,4 +49,4 @@
          </children>
       </HBox>
    </children>
-</AnchorPane>
+</VBox>
