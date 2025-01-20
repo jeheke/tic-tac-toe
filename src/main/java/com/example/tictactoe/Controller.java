@@ -79,7 +79,7 @@ public class Controller {
         Parent root = loader.load();
 
         botLogic botLogicController = loader.getController();
-        String difficulty = "Hard" ;
+        String difficulty = "Hard";
         botLogicController.setDifficulty(difficulty);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -89,7 +89,13 @@ public class Controller {
     }
 
     public void exit(ActionEvent event) {
+        Menu client = Menu.getInstance();
+        client.disconnect();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+
+        System.exit(0);
     }
 }
+
