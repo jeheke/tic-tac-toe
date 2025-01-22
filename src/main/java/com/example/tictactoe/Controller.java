@@ -1,5 +1,6 @@
 package com.example.tictactoe;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -9,6 +10,8 @@ import javafx.stage.Stage;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class Controller {
     private Stage stage;
@@ -61,32 +64,37 @@ public class Controller {
     }
 
     public void switchToGameBotNormal(ActionEvent event) throws IOException {
+        Menu client = Menu.getInstance();
+
+        String difficulty = "Normal";
+        client.sendDifficultyToServer(difficulty);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-board-bot.fxml"));
         Parent root = loader.load();
-
-        botLogic botLogicController = loader.getController();
-        String difficulty = "Normal";
-        botLogicController.setDifficulty(difficulty);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     public void switchToGameBotHard(ActionEvent event) throws IOException {
+        Menu client = Menu.getInstance();
+
+        String difficulty = "Hard";
+        client.sendDifficultyToServer(difficulty);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-board-bot.fxml"));
         Parent root = loader.load();
-
-        botLogic botLogicController = loader.getController();
-        String difficulty = "Hard";
-        botLogicController.setDifficulty(difficulty);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
 
     public void exit(ActionEvent event) {
         Menu client = Menu.getInstance();
