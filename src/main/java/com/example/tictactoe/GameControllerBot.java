@@ -39,11 +39,12 @@ public class GameControllerBot {
 
     private char[] gameBoard = new char[9];
     private boolean gameOver = false;
-    private Menu client;
+    private Client client;
+    private Thread serverListenerThread;
 
     @FXML
     public void initialize() {
-        client = Menu.getInstance();
+        client = Client.getInstance();
         startListeningToServer();
 
         for (int i = 0; i < gameBoard.length; i++) {
@@ -69,8 +70,16 @@ public class GameControllerBot {
     public void switchToMenu(ActionEvent event) throws IOException {
         // Informowanie serwera o zakończeniu gry
         client.getOut().println("END_GAME");
+
+        // Zatrzymaj wątek nasłuchujący
+        if (serverListenerThread != null && serverListenerThread.isAlive()) {
+            serverListenerThread.interrupt();
+        }
+
+        // Resetowanie stanu klienta
         gameOver = false;
         resetGameState();
+
         // Przełączanie do menu
         Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -85,12 +94,12 @@ public class GameControllerBot {
     }
 
     private void startListeningToServer() {
-        new Thread(() -> {
+        serverListenerThread = new Thread(() -> {
             try {
                 BufferedReader in = client.getInReader();
                 String serverMessage;
 
-                while ((serverMessage = in.readLine()) != null) {
+                while (!Thread.currentThread().isInterrupted() && (serverMessage = in.readLine()) != null) {
                     if (serverMessage.startsWith("UPDATE_BOARD:")) {
                         String boardState = serverMessage.substring("UPDATE_BOARD:".length());
                         updateGameBoard(boardState);
@@ -102,8 +111,12 @@ public class GameControllerBot {
                 }
             } catch (IOException e) {
                 System.out.println("Błąd komunikacji z serwerem: " + e.getMessage());
+            } finally {
+                System.out.println("Wątek nasłuchujący został zakończony.");
             }
-        }).start();
+        });
+
+        serverListenerThread.start();
     }
 
     private void updateGameBoard(String boardState) {

@@ -76,9 +76,14 @@ public class Server {
                         }
                     } else if (message.equals("END_GAME")) {
                         System.out.println("Klient " + clientId + " zakończył grę.");
-                        sessions.remove(clientId); // Usuwanie sesji gry klienta
-                        gameSession = null;
-                        out.println("Gra została zakończona.");
+
+                        // Usuwanie sesji gry klienta i resetowanie stanu
+                        if (sessions.containsKey(clientId)) {
+                            sessions.remove(clientId); // Usuwanie istniejącej sesji gry
+                        }
+
+                        gameSession = null; // Resetowanie instancji gry
+                        out.println("Gra została zakończona. Powrót do menu.");
                     } else {
                         out.println("Nieznane polecenie: " + message);
                     }
