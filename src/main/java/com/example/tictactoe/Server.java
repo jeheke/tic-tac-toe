@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.*;
 
 public class Server {
     private static final int PORT = 12345;
@@ -12,23 +13,34 @@ public class Server {
     private static final AtomicInteger clientCounter = new AtomicInteger(1);
     private static final ConcurrentHashMap<Integer, GameSessionBot> sessions = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Integer, PrintWriter> clientOutputs = new ConcurrentHashMap<>();
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
+
+    static {
+        try {
+            FileHandler fileHandler = new FileHandler("server_logs.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            logger.addHandler(fileHandler);
+            logger.setLevel(Level.ALL);
+        } catch (IOException e) {
+            System.err.println("Nie udało się skonfigurować logowania do pliku: " + e.getMessage());
+        }
+    }
 
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(MAX_CLIENTS);
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-            System.out.println("Serwer nasłuchuje na porcie " + PORT);
+            logger.info("Serwer nasłuchuje na porcie " + PORT);
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                System.out.println("Połączono z klientem: " + clientSocket.getInetAddress());
+                logger.info("Połączono z klientem: " + clientSocket.getInetAddress());
 
                 int clientId = clientCounter.getAndIncrement();
-
                 threadPool.submit(new ClientHandler(clientSocket, clientId));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Błąd główny serwera", e);
         }
     }
 
@@ -49,15 +61,16 @@ public class Server {
                     PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
             ) {
                 clientOutputs.put(clientId, out);
+                logger.info("Klient " + clientId + " połączony.");
                 out.println("Witaj na serwerze, Twój ID to: " + clientId);
 
                 String message;
                 while ((message = in.readLine()) != null) {
-                    System.out.println("Otrzymano od klienta " + clientId + ": " + message);
+                    logger.info("Otrzymano od klienta " + clientId + ": " + message);
 
                     if (message.startsWith("SET_DIFFICULTY:")) {
                         String difficulty = message.substring("SET_DIFFICULTY:".length());
-                        System.out.println("Ustawiony poziom trudności od klienta " + clientId + ": " + difficulty);
+                        logger.info("Ustawiony poziom trudności od klienta " + clientId + ": " + difficulty);
 
                         // Tworzenie nowej gry z botem
                         gameSession = new GameSessionBot(difficulty, clientId);
@@ -75,7 +88,7 @@ public class Server {
                             gameSession.restart();
                         }
                     } else if (message.equals("END_GAME")) {
-                        System.out.println("Klient " + clientId + " zakończył grę.");
+                        logger.info("Klient " + clientId + " zakończył grę.");
 
                         // Usuwanie sesji gry klienta i resetowanie stanu
                         if (sessions.containsKey(clientId)) {
@@ -89,20 +102,19 @@ public class Server {
                     }
                 }
 
-                System.out.println("Połączenie z klientem " + clientId + " zostało zakończone.");
+                logger.info("Połączenie z klientem " + clientId + " zostało zakończone.");
             } catch (IOException e) {
-                System.out.println("Błąd połączenia z klientem " + clientId + ": " + e.getMessage());
+                logger.log(Level.WARNING, "Błąd połączenia z klientem " + clientId, e);
             } finally {
                 try {
                     clientSocket.close();
                     clientOutputs.remove(clientId);
                     sessions.remove(clientId);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.log(Level.SEVERE, "Błąd zamykania połączenia z klientem " + clientId, e);
                 }
             }
         }
-
     }
 
     public static PrintWriter getClientOutputStream(int clientId) {
