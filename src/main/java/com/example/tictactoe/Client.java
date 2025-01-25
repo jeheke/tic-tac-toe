@@ -112,6 +112,19 @@ public class Client extends Application {
         }
     }
 
+    public void sendModeToServer() {
+        if (isConnected()) {
+            if (out != null) {
+                out.println("START_PVP");
+                System.out.println("Wysłano pvp");
+            } else {
+                System.out.println("Strumień wyjściowy (out) nie został zainicjowany.");
+            }
+        } else {
+            System.out.println("Połączenie z serwerem nie zostało jeszcze nawiązane.");
+        }
+    }
+
     public BufferedReader getInReader() {
         return in;
     }

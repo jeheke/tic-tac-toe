@@ -52,6 +52,9 @@ public class SceneController {
     }
 
     public void switchToGamePvP(ActionEvent event) throws IOException {
+       Client client = Client.getInstance();
+       client.sendModeToServer();
+
         Parent root = loadFXML("game-board-pvp.fxml");
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

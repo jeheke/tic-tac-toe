@@ -22,13 +22,6 @@ public class GameSessionBot {
         System.out.println("Poziom trudności: " + difficulty + ", Gracz ID: " + clientId);
     }
 
-    public void processClientMessage(String message) {
-        if (message.startsWith("PLAYER_MOVE:")) {
-            int position = Integer.parseInt(message.substring("PLAYER_MOVE:".length()));
-            handlePlayerMove(position);
-        }
-    }
-
     public void handlePlayerMove(int position) {
         if (gameOver || gameBoard[position] != '-') {
             return;

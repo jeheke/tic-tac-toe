@@ -1,0 +1,20 @@
+sty 25, 2025 4:10:56 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 4:16:45 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 4:16:49 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 4:16:49 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 4:16:56 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normal
+sty 25, 2025 4:16:56 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Normal
+sty 25, 2025 4:16:57 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 4:16:58 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:6
+sty 25, 2025 4:17:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 25, 2025 4:17:03 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.
