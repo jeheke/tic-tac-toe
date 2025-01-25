@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 public class GameSessionPvP {
     private char[] gameBoard = new char[9];
     private boolean gameOver = false;
-
     private int player1;
     private int player2;
     private int currentPlayer;
@@ -21,7 +20,7 @@ public class GameSessionPvP {
             gameBoard[i] = '-';
         }
 
-        System.out.println("Rozpoczęto nową grę pvp");
+        System.out.println("Stworzono nową sesję gry dla Gracza " + player1 + " i Gracza " + player2);
         sendMessage(player1, "GAME_STARTED: 1");
         sendMessage(player2, "GAME_STARTED: 2");
         sendMessage(player1, "ASSIGN_SYMBOL:X");
@@ -32,52 +31,40 @@ public class GameSessionPvP {
         PrintWriter out1 = Server.getClientOutputStream(player1);
         PrintWriter out2 = Server.getClientOutputStream(player2);
 
-        // Logi debugowe
-        System.out.println("Otrzymano od gracza " + clientId + ": PLAYER_MOVE_PVP:" + position);
-        System.out.println("Aktualny gracz: " + currentPlayer);
+        System.out.println("Ruch gracza " + clientId + ": " + position);
 
-        // Sprawdzamy, czy gra jest zakończona lub czy pole już zostało zajęte
         if (gameOver || gameBoard[position] != '-') {
             return;
         }
 
-        // Sprawdzamy, czy ruch wykonuje aktualny gracz
         if (clientId == currentPlayer) {
             System.out.println("Wykonano ruch gracza " + clientId + " na pozycji " + position);
-            gameBoard[position] = (currentPlayer == player1) ? 'X' : 'O'; // Gracz 1 to 'X', gracz 2 to 'O'
+            gameBoard[position] = (currentPlayer == player1) ? 'X' : 'O';
             sendBoardState(out1, out2);
 
-            // Sprawdzamy warunki zakończenia gry
             if (checkWin()) {
                 gameOver = true;
                 sendMessage(player1, "GAME_OVER_PVP: Gracz " + clientId + " wygrał!");
                 sendMessage(player2, "GAME_OVER_PVP: Gracz " + clientId + " wygrał!");
-                return; // Koniec gry
+                return;
             }
 
-            // Sprawdzamy, czy plansza jest pełna
             if (isBoardFull()) {
                 sendMessage(player1, "GAME_OVER_PVP: Remis!");
                 sendMessage(player2, "GAME_OVER_PVP: Remis!");
                 gameOver = true;
-                return; // Koniec gry
+                return;
             }
 
-            // Przełączamy na następnego gracza
             currentPlayer = (currentPlayer == player1) ? player2 : player1;
 
-            // Powiadamianie graczy o aktualnej turze
             sendMessage(player1, (currentPlayer == player1) ? "YOUR_TURN" : "ENEMY_TURN");
             sendMessage(player2, (currentPlayer == player2) ? "YOUR_TURN" : "ENEMY_TURN");
-        } else {
-            System.out.println("Gracz " + clientId + " próbował wykonać ruch, ale to nie jego tura.");
-            sendMessage(clientId, "Nie Twoja tura!");
         }
     }
 
     private void sendBoardState(PrintWriter out1, PrintWriter out2) {
         String boardState = "UPDATE_BOARD_PVP:" + String.valueOf(gameBoard);
-        System.out.println("Wysyłanie stanu planszy: " + boardState); // Debug log
         if (out1 != null) {
             out1.println(boardState);
             out1.flush();
@@ -94,7 +81,6 @@ public class GameSessionPvP {
                 {0, 3, 6}, {1, 4, 7}, {2, 5, 8},
                 {0, 4, 8}, {2, 4, 6}
         };
-
         for (int[] pattern : winPatterns) {
             if (gameBoard[pattern[0]] != '-' && gameBoard[pattern[0]] == gameBoard[pattern[1]] && gameBoard[pattern[1]] == gameBoard[pattern[2]]) {
                 return true;

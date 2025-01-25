@@ -17,23 +17,7 @@ import java.io.IOException;
 
 public class GameControllerBot {
     @FXML
-    private Button button00;
-    @FXML
-    private Button button01;
-    @FXML
-    private Button button02;
-    @FXML
-    private Button button10;
-    @FXML
-    private Button button11;
-    @FXML
-    private Button button12;
-    @FXML
-    private Button button20;
-    @FXML
-    private Button button21;
-    @FXML
-    private Button button22;
+    private Button button00, button01, button02, button10, button11, button12, button20, button21, button22;
     @FXML
     private Text winnerText;
 
@@ -46,7 +30,6 @@ public class GameControllerBot {
     public void initialize() {
         client = Client.getInstance();
         startListeningToServer();
-
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i] = '-';
         }
@@ -62,25 +45,21 @@ public class GameControllerBot {
         int position = getButtonIndex(clickedButton);
 
         if (position != -1 && gameBoard[position] == '-') {
-            client.getOut().println("PLAYER_MOVE:" + position); // Wysłanie ruchu do serwera
+            client.getOut().println("PLAYER_MOVE:" + position);
         }
     }
 
     @FXML
     public void switchToMenu(ActionEvent event) throws IOException {
-        // Informowanie serwera o zakończeniu gry
         client.getOut().println("END_GAME");
 
-        // Zatrzymaj wątek nasłuchujący
         if (serverListenerThread != null && serverListenerThread.isAlive()) {
             serverListenerThread.interrupt();
         }
 
-        // Resetowanie stanu klienta
         gameOver = false;
         resetGameState();
 
-        // Przełączanie do menu
         Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -88,9 +67,10 @@ public class GameControllerBot {
         stage.show();
     }
 
-    public void handleWindowClose(WindowEvent event) {
-        // Informowanie serwera o zakończeniu gry przed zamknięciem aplikacji
-        client.getOut().println("END_GAME");
+    @FXML
+    private void onResetButton(ActionEvent event) {
+        client.getOut().println("RESTART_GAME");
+        resetGameState();
     }
 
     private void startListeningToServer() {
@@ -115,7 +95,6 @@ public class GameControllerBot {
                 System.out.println("Wątek nasłuchujący został zakończony.");
             }
         });
-
         serverListenerThread.start();
     }
 
@@ -189,13 +168,7 @@ public class GameControllerBot {
             gameBoard[i] = '-';
             updateButton(i, '-');
         }
-        winnerText.setText("");
+        winnerText.setText("Kółko i krzyżyk");
         gameOver = false;
-    }
-
-    @FXML
-    private void onResetButton(ActionEvent event) {
-        client.getOut().println("RESTART_GAME");
-        resetGameState();
     }
 }

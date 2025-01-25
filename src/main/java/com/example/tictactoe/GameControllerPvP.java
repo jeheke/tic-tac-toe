@@ -39,8 +39,8 @@ public class GameControllerPvP {
             gameBoard[i] = '-';
         }
 
-            waitForPlayerText.setText("Oczekiwanie na przeciwnika...");
-            roundText.setText("");
+        waitForPlayerText.setText("Oczekiwanie na przeciwnika...");
+        roundText.setText("");
     }
 
     @FXML
@@ -53,7 +53,7 @@ public class GameControllerPvP {
         int position = getButtonIndex(clickedButton);
 
         if (position != -1 && gameBoard[position] == '-') {
-            gameBoard[position] = mySymbol; // Ustal aktualny symbol gracza na podstawie logiki
+            gameBoard[position] = mySymbol;
             client.getOut().println("PLAYER_MOVE_PVP:" + position);
             myTurn = false;
         }
@@ -76,16 +76,11 @@ public class GameControllerPvP {
         stage.show();
     }
 
-    public void handleWindowClose(WindowEvent event) {
-        client.getOut().println("END_GAME");
-    }
-
     private void startListeningToServer() {
         serverListenerThread = new Thread(() -> {
             try {
                 BufferedReader in = client.getInReader();
                 String serverMessage;
-
                 while (!Thread.currentThread().isInterrupted() && (serverMessage = in.readLine()) != null) {
                     if (serverMessage.startsWith("UPDATE_BOARD_PVP:")) {
                         String boardState = serverMessage.substring("UPDATE_BOARD_PVP:".length());
@@ -94,6 +89,7 @@ public class GameControllerPvP {
                         String result = serverMessage.substring("GAME_OVER_PVP:".length());
                         updateWinnerText(result);
                         gameOver = true;
+                        roundText.setText("");
                     } else if (serverMessage.startsWith("GAME_STARTED")) {
                         updateWaitingText(false);
                         int player = Integer.parseInt(serverMessage.substring("GAME_STARTED:".length()).trim());
@@ -111,7 +107,6 @@ public class GameControllerPvP {
                     } else if (serverMessage.startsWith("ASSIGN_SYMBOL:")) {
                         mySymbol = serverMessage.charAt("ASSIGN_SYMBOL:".length());
                         enemySymbol = (mySymbol == 'X') ? 'O' : 'X';
-                        System.out.println("Przypisano mi symbol: " + mySymbol);
                     }
                 }
             } catch (IOException e) {
@@ -120,7 +115,6 @@ public class GameControllerPvP {
                 System.out.println("Wątek nasłuchujący został zakończony.");
             }
         });
-
         serverListenerThread.start();
     }
 
@@ -192,7 +186,7 @@ public class GameControllerPvP {
     private void updateWaitingText(boolean waiting) {
         Platform.runLater(() -> {
             if (waiting) {
-                waitForPlayerText.setText("Oczekiwanie na drugiego gracza...");
+                waitForPlayerText.setText("Oczekiwanie na drugiego gracza..");
             } else {
                 waitForPlayerText.setText("");
             }

@@ -526,3 +526,351 @@ sty 25, 2025 5:53:26 PM com.example.tictactoe.Server$ClientHandler run
 INFO: Połączenie z klientem 1 zostało zakończone.
 sty 25, 2025 5:53:28 PM com.example.tictactoe.Server$ClientHandler run
 INFO: Połączenie z klientem 2 zostało zakończone.
+sty 25, 2025 6:01:55 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 6:01:58 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:01:58 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 6:01:59 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normal
+sty 25, 2025 6:01:59 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Normal
+sty 25, 2025 6:02:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:02:01 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:02:01 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:02:01 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:5
+sty 25, 2025 6:09:19 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 6:09:21 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:09:21 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 6:09:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Hard
+sty 25, 2025 6:09:24 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Hard
+sty 25, 2025 6:09:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:09:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:09:25 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:5
+sty 25, 2025 6:09:27 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:09:27 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:09:28 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:09:28 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:7
+sty 25, 2025 6:09:29 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 25, 2025 6:09:30 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:3
+sty 25, 2025 6:09:31 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:09:31 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:09:32 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normal
+sty 25, 2025 6:09:32 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Normal
+sty 25, 2025 6:09:33 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:09:33 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:09:34 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 25, 2025 6:09:41 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:09:42 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:09:42 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:09:43 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:09:43 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:7
+sty 25, 2025 6:09:44 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.
+sty 25, 2025 6:26:38 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 6:26:40 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:26:40 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 6:26:41 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normalny
+sty 25, 2025 6:26:41 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Normalny
+sty 25, 2025 6:26:51 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:26:52 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:26:54 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:7
+sty 25, 2025 6:26:56 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:26:58 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:26:59 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:26:59 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:3
+sty 25, 2025 6:27:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:7
+sty 25, 2025 6:27:01 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:8
+sty 25, 2025 6:27:03 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 25, 2025 6:27:04 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:27:05 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:27:05 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:27:06 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:27:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 25, 2025 6:27:08 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:27:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:3
+sty 25, 2025 6:27:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:27:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:27:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:8
+sty 25, 2025 6:27:11 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:6
+sty 25, 2025 6:27:13 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:27:13 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:27:14 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Trudny
+sty 25, 2025 6:27:14 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 1: Trudny
+sty 25, 2025 6:27:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:27:15 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:27:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.
+sty 25, 2025 6:27:35 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:27:35 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 2 połączony.
+sty 25, 2025 6:27:37 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: SET_DIFFICULTY:Normalny
+sty 25, 2025 6:27:37 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiony poziom trudności od klienta 2: Normalny
+sty 25, 2025 6:27:38 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:0
+sty 25, 2025 6:27:38 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:1
+sty 25, 2025 6:27:39 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:3
+sty 25, 2025 6:27:40 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: RESTART_GAME
+sty 25, 2025 6:27:41 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:4
+sty 25, 2025 6:27:41 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:3
+sty 25, 2025 6:27:41 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:0
+sty 25, 2025 6:27:42 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: PLAYER_MOVE:8
+sty 25, 2025 6:27:45 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: END_GAME
+sty 25, 2025 6:27:45 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 2 zakończył grę.
+sty 25, 2025 6:27:45 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 2 zostało zakończone.
+sty 25, 2025 6:33:45 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:33:45 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 3 połączony.
+sty 25, 2025 6:33:46 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:33:46 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 4 połączony.
+sty 25, 2025 6:33:48 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: START_PVP
+sty 25, 2025 6:33:48 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 4 dodany do kolejki oczekujących.
+sty 25, 2025 6:33:51 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: START_PVP
+sty 25, 2025 6:33:51 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 połączony z graczem 4.
+sty 25, 2025 6:34:17 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: PLAYER_MOVE_PVP:0
+sty 25, 2025 6:34:17 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 wykonuje ruch na pozycji 0
+sty 25, 2025 6:34:18 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: PLAYER_MOVE_PVP:1
+sty 25, 2025 6:34:18 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 4 wykonuje ruch na pozycji 1
+sty 25, 2025 6:34:21 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: PLAYER_MOVE_PVP:4
+sty 25, 2025 6:34:21 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 wykonuje ruch na pozycji 4
+sty 25, 2025 6:34:22 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: PLAYER_MOVE_PVP:8
+sty 25, 2025 6:34:22 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 4 wykonuje ruch na pozycji 8
+sty 25, 2025 6:34:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: PLAYER_MOVE_PVP:5
+sty 25, 2025 6:34:24 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 wykonuje ruch na pozycji 5
+sty 25, 2025 6:34:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: PLAYER_MOVE_PVP:3
+sty 25, 2025 6:34:24 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 4 wykonuje ruch na pozycji 3
+sty 25, 2025 6:34:27 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: PLAYER_MOVE_PVP:7
+sty 25, 2025 6:34:27 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 wykonuje ruch na pozycji 7
+sty 25, 2025 6:34:30 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: PLAYER_MOVE_PVP:2
+sty 25, 2025 6:34:30 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 4 wykonuje ruch na pozycji 2
+sty 25, 2025 6:34:34 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: PLAYER_MOVE_PVP:6
+sty 25, 2025 6:34:34 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 3 wykonuje ruch na pozycji 6
+sty 25, 2025 6:34:42 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: END_GAME
+sty 25, 2025 6:34:42 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 4 zakończył grę.
+sty 25, 2025 6:34:42 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 4 zostało zakończone.
+sty 25, 2025 6:34:44 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: END_GAME
+sty 25, 2025 6:34:44 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 3 zakończył grę.
+sty 25, 2025 6:34:44 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 3 zostało zakończone.
+sty 25, 2025 6:35:11 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:35:11 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 5 połączony.
+sty 25, 2025 6:35:12 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: /127.0.0.1
+sty 25, 2025 6:35:12 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 6 połączony.
+sty 25, 2025 6:35:14 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 6: START_PVP
+sty 25, 2025 6:35:14 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 6 dodany do kolejki oczekujących.
+sty 25, 2025 6:35:17 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 5: START_PVP
+sty 25, 2025 6:35:17 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 5 połączony z graczem 6.
+sty 25, 2025 6:35:19 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 5: PLAYER_MOVE_PVP:0
+sty 25, 2025 6:35:19 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 5 wykonuje ruch na pozycji 0
+sty 25, 2025 6:35:24 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 6: PLAYER_MOVE_PVP:4
+sty 25, 2025 6:35:24 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 6 wykonuje ruch na pozycji 4
+sty 25, 2025 6:35:27 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 5: PLAYER_MOVE_PVP:3
+sty 25, 2025 6:35:27 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 5 wykonuje ruch na pozycji 3
+sty 25, 2025 6:35:28 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 6: PLAYER_MOVE_PVP:7
+sty 25, 2025 6:35:28 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 6 wykonuje ruch na pozycji 7
+sty 25, 2025 6:35:30 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 5: PLAYER_MOVE_PVP:6
+sty 25, 2025 6:35:30 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 5 wykonuje ruch na pozycji 6
+sty 25, 2025 6:35:36 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 6: END_GAME
+sty 25, 2025 6:35:36 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 6 zakończył grę.
+sty 25, 2025 6:35:36 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 6 zostało zakończone.
+sty 25, 2025 6:35:37 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 5: END_GAME
+sty 25, 2025 6:35:37 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 5 zakończył grę.
+sty 25, 2025 6:35:37 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 5 zostało zakończone.
+sty 25, 2025 6:44:24 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 6:44:28 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 25, 2025 6:44:28 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 6:44:30 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normalny
+sty 25, 2025 6:44:30 PM com.example.tictactoe.Server$ClientHandler startGameWithBot
+INFO: Ustawiono Normalny dla Klienta 1
+sty 25, 2025 6:45:14 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:45:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:45:17 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:45:17 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:45:17 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.
+sty 25, 2025 6:45:57 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 25, 2025 6:46:07 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 25, 2025 6:46:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 25, 2025 6:46:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normalny
+sty 25, 2025 6:46:09 PM com.example.tictactoe.Server$ClientHandler handleGameBot
+INFO: Ustawiono Normalny poziom trudności dla Gracza 1
+sty 25, 2025 6:46:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:46:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:5
+sty 25, 2025 6:46:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:46:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:7
+sty 25, 2025 6:46:12 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: RESTART_GAME
+sty 25, 2025 6:46:12 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:46:12 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:46:13 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:5
+sty 25, 2025 6:46:13 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:46:13 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:46:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Trudny
+sty 25, 2025 6:46:15 PM com.example.tictactoe.Server$ClientHandler handleGameBot
+INFO: Ustawiono Trudny poziom trudności dla Gracza 1
+sty 25, 2025 6:46:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 25, 2025 6:46:15 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:1
+sty 25, 2025 6:46:16 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 25, 2025 6:46:16 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:8
+sty 25, 2025 6:46:19 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 25, 2025 6:46:19 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 25, 2025 6:46:19 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.

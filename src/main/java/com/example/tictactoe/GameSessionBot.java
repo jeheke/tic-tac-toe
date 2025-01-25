@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 public class GameSessionBot {
-    private int playerTurn = 0; // 0: player, 1: bot
+    private int playerTurn = 0;
     private char[] gameBoard = new char[9];
     private String difficulty;
     private int clientId;
@@ -19,20 +19,17 @@ public class GameSessionBot {
             gameBoard[i] = '-';
         }
 
-        System.out.println("Rozpoczęto nową grę z botem.");
-        System.out.println("Poziom trudności: " + difficulty + ", Gracz ID: " + clientId);
+        System.out.println("Stworzono nową sesję gry dla Gracza " + clientId + " na poziomie trudności: " + difficulty);
     }
 
     public void handlePlayerMove(int position) {
         if (gameOver || gameBoard[position] != '-') {
             return;
         }
-
         gameBoard[position] = 'X';
-        playerTurn = 1; // Switch to bot's turn
-
-        sendToClient("UPDATE_BOARD:" + String.valueOf(gameBoard)); // Send updated board to client
-        checkGameState(); // Check the game state
+        playerTurn = 1;
+        sendToClient("UPDATE_BOARD:" + String.valueOf(gameBoard));
+        checkGameState();
 
         if (!gameOver) {
             botMove();
@@ -42,20 +39,18 @@ public class GameSessionBot {
     private void botMove() {
         int move = -1;
 
-        if (difficulty.equals("Hard")) {
+        if (difficulty.equals("Trudny")) {
             move = findBestMove();
         }
-
-        if (move == -1) { // No best move found, or difficulty is Normal
+        if (move == -1) {
             move = findRandomMove();
         }
-
         if (move != -1) {
             gameBoard[move] = 'O';
-            playerTurn = 0; // Switch back to player's turn
+            playerTurn = 0;
 
-            sendToClient("UPDATE_BOARD:" + String.valueOf(gameBoard)); // Send updated board to client before checking win
-            checkGameState(); // Check the game state after the bot's move
+            sendToClient("UPDATE_BOARD:" + String.valueOf(gameBoard));
+            checkGameState();
         }
     }
 
@@ -70,7 +65,6 @@ public class GameSessionBot {
                 gameBoard[i] = '-';
             }
         }
-
         for (int i = 0; i < gameBoard.length; i++) {
             if (gameBoard[i] == '-') {
                 gameBoard[i] = 'X';
@@ -81,7 +75,6 @@ public class GameSessionBot {
                 gameBoard[i] = '-';
             }
         }
-
         return -1;
     }
 
@@ -91,19 +84,18 @@ public class GameSessionBot {
         do {
             move = random.nextInt(9);
         } while (gameBoard[move] != '-');
-
         return move;
     }
 
     private void checkGameState() {
         if (checkWin('X')) {
-            sendToClient("GAME_OVER:Player wins!");
+            sendToClient("GAME_OVER:Wygrałeś!");
             gameOver = true;
         } else if (checkWin('O')) {
-            sendToClient("GAME_OVER:Bot wins!");
+            sendToClient("GAME_OVER:Przegrałeś!");
             gameOver = true;
         } else if (isBoardFull()) {
-            sendToClient("GAME_OVER:Draw!");
+            sendToClient("GAME_OVER:Remis!");
             gameOver = true;
         }
     }
@@ -122,7 +114,6 @@ public class GameSessionBot {
                 return true;
             }
         }
-
         return false;
     }
 

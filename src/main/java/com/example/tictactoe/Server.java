@@ -8,10 +8,10 @@ import java.util.logging.*;
 
 public class Server {
     private static final int PORT = 12345;
-    private static final int MAX_CLIENTS = 3;
+    private static final int MAX_CLIENTS = 50;
 
     private static final AtomicInteger clientCounter = new AtomicInteger(1);
-    private static final ConcurrentHashMap<Integer, GameSessionBot> sessions = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<Integer, GameSessionBot> botSessions = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Integer, PrintWriter> clientOutputs = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Integer, GameSessionPvP> pvpSessions = new ConcurrentHashMap<>();
     private static final ConcurrentLinkedQueue<Integer> waitingPlayers = new ConcurrentLinkedQueue<>();
@@ -29,7 +29,6 @@ public class Server {
         }
     }
 
-
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(MAX_CLIENTS);
 
@@ -38,11 +37,10 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
-                logger.info("Połączono z klientem: " + clientSocket.getInetAddress());
-
                 int clientId = clientCounter.getAndIncrement();
+                logger.info("Połączono z klientem: " + clientId);
                 ClientHandler clientHandler = new ClientHandler(clientSocket, clientId);
-                clientHandlers.put(clientId, clientHandler); // Zapisz obiekt ClientHandler w mapie
+                clientHandlers.put(clientId, clientHandler);
                 threadPool.submit(clientHandler);
             }
         } catch (IOException e) {
@@ -69,7 +67,7 @@ public class Server {
             ) {
                 clientOutputs.put(clientId, out);
                 logger.info("Klient " + clientId + " połączony.");
-                out.println("Witaj na serwerze, Twój ID to: " + clientId);
+                out.println("Witaj na serwerze, Twoje ID to: " + clientId);
 
                 String message;
                 while ((message = in.readLine()) != null) {
@@ -87,13 +85,14 @@ public class Server {
 
         private void handleGameBot(String message, PrintWriter out) {
             if (message.startsWith("SET_DIFFICULTY:")) {
-                startGameWithBot(message, out);
+                String difficulty = message.substring("SET_DIFFICULTY:".length());
+                logger.info("Ustawiono " + difficulty + " poziom trudności dla Gracza " + clientId);
+                gameSession = new GameSessionBot(difficulty, clientId);
+                botSessions.put(clientId, gameSession);
             } else if (message.startsWith("PLAYER_MOVE:")) {
                 if (gameSession != null) {
                     int position = Integer.parseInt(message.substring("PLAYER_MOVE:".length()));
                     gameSession.handlePlayerMove(position);
-                } else {
-                    out.println("Rozgrywka nie została jeszcze rozpoczęta. Wybierz poziom trudności.");
                 }
             } else if (message.equals("RESTART_GAME")) {
                 if (gameSession != null) {
@@ -106,46 +105,28 @@ public class Server {
             }
         }
 
-        private void startGameWithBot(String message, PrintWriter out) {
-            String difficulty = message.substring("SET_DIFFICULTY:".length());
-            logger.info("Ustawiony poziom trudności od klienta " + clientId + ": " + difficulty);
-            gameSession = new GameSessionBot(difficulty, clientId);
-            sessions.put(clientId, gameSession);
-            out.println("Gra z botem została rozpoczęta na poziomie trudności: " + difficulty);
-        }
 
         private void handleGamePvp(String message, PrintWriter out) {
             if (message.startsWith("START_PVP")) {
                 synchronized (waitingPlayers) {
                     Integer opponentId = waitingPlayers.poll();
                     if (opponentId == null) {
-                        // Jeśli nie ma przeciwnika, dodaj klienta do kolejki
                         waitingPlayers.add(clientId);
                         logger.info("Gracz " + clientId + " dodany do kolejki oczekujących.");
                         out.println("Czekam na drugiego gracza...");
                     } else {
-                        // Gdy znajdzie się przeciwnik, stwórz sesję PvP między dwoma graczami
                         logger.info("Gracz " + clientId + " połączony z graczem " + opponentId + ".");
                         GameSessionPvP session = new GameSessionPvP(clientId, opponentId);
-
-                        // Zapisz sesję PvP w mapie
                         pvpSessions.put(clientId, session);
                         pvpSessions.put(opponentId, session);
-
-                        // Pobierz ClientHandler dla przeciwnika i przypisz sesję PvP
                         ClientHandler opponentHandler = Server.getClientHandler(opponentId);
                         if (opponentHandler != null) {
-                            opponentHandler.setGameSessionPvp(session); // Przypisz sesję PvP do przeciwnika
+                            opponentHandler.setGameSessionPvp(session);
                         }
-
-                        // Przypisz sesję PvP do obecnego klienta
                         this.gameSessionPvp = session;
-
-                        // Wyślij komunikaty do obu graczy
                         sendMessageToPlayer(clientId, "Połączono z przeciwnikiem! Gra PvP rozpoczęta.");
                         sendMessageToPlayer(opponentId, "Połączono z przeciwnikiem! Gra PvP rozpoczęta.");
 
-                        // Ustal, który gracz zaczyna
                         sendMessageToPlayer(clientId, "YOUR_TURN");
                         sendMessageToPlayer(opponentId, "ENEMY_TURN");
                     }
@@ -164,8 +145,6 @@ public class Server {
                     out.println("Nie znajdujesz się w żadnej grze PvP!");
                     return;
                 }
-
-                // Oznacz gracza jako "wrócił do menu"
                 if (gameSessionPvp.getPlayer1Id() == clientId) {
                     gameSessionPvp.setPlayer1ReturnedToMenu(true);
                     logger.info("Gracz " + clientId + " wrócił do menu.");
@@ -173,25 +152,19 @@ public class Server {
                     gameSessionPvp.setPlayer2ReturnedToMenu(true);
                     logger.info("Gracz " + clientId + " wrócił do menu.");
                 }
-
-                // Sprawdź, czy obaj gracze wrócili do menu
                 if (gameSessionPvp.haveBothPlayersReturnedToMenu()) {
                     logger.info("Obaj gracze wrócili do menu. Usuwanie sesji PvP.");
 
-                    // Usuń sesję z mapy PvP
                     int player1Id = gameSessionPvp.getPlayer1Id();
                     int player2Id = gameSessionPvp.getPlayer2Id();
                     pvpSessions.remove(player1Id);
                     pvpSessions.remove(player2Id);
 
-                    // Powiadom graczy
                     sendMessageToPlayer(player1Id, "Obaj gracze wrócili do menu. Sesja została zakończona.");
                     sendMessageToPlayer(player2Id, "Obaj gracze wrócili do menu. Sesja została zakończona.");
 
-                    // Opcjonalnie wyczyść obiekty sesji PvP
                     gameSessionPvp=null;
                 } else {
-                    // Powiadom gracza, że oczekujemy jeszcze na drugiego
                     out.println("Oczekuję, aż drugi gracz wróci do menu...");
                 }
             }
@@ -206,7 +179,7 @@ public class Server {
 
         private void endGame(PrintWriter out) {
             logger.info("Klient " + clientId + " zakończył grę.");
-            sessions.remove(clientId);
+            botSessions.remove(clientId);
             gameSession = null;
             gameSessionPvp = null;
         }
@@ -215,7 +188,7 @@ public class Server {
             try {
                 clientSocket.close();
                 clientOutputs.remove(clientId);
-                sessions.remove(clientId);
+                botSessions.remove(clientId);
                 waitingPlayers.remove(clientId);
                 clientHandlers.remove(clientId); // Usunięcie z mapy
             } catch (IOException e) {

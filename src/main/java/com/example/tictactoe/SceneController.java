@@ -53,7 +53,7 @@ public class SceneController {
 
     public void switchToGamePvP(ActionEvent event) throws IOException {
        Client client = Client.getInstance();
-       client.sendModeToServer();
+        client.getOut().println("START_PVP");
 
         Parent root = loadFXML("game-board-pvp.fxml");
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -66,8 +66,8 @@ public class SceneController {
     public void switchToGameBotNormal(ActionEvent event) throws IOException {
         Client client = Client.getInstance();
 
-        String difficulty = "Normal";
-        client.sendDifficultyToServer(difficulty);
+        String difficulty = "Normalny";
+        client.getOut().println("SET_DIFFICULTY:" + difficulty);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-board-bot.fxml"));
         Parent root = loader.load();
@@ -83,8 +83,8 @@ public class SceneController {
     public void switchToGameBotHard(ActionEvent event) throws IOException {
         Client client = Client.getInstance();
 
-        String difficulty = "Hard";
-        client.sendDifficultyToServer(difficulty);
+        String difficulty = "Trudny";
+        client.getOut().println("SET_DIFFICULTY:" + difficulty);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-board-bot.fxml"));
         Parent root = loader.load();
