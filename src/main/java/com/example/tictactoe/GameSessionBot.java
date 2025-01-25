@@ -10,6 +10,7 @@ public class GameSessionBot {
     private int clientId;
     private boolean gameOver = false;
 
+
     public GameSessionBot(String difficulty, int clientId) {
         this.difficulty = difficulty;
         this.clientId = clientId;

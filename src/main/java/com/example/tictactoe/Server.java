@@ -16,6 +16,7 @@ public class Server {
     private static final ConcurrentHashMap<Integer, GameSessionPvP> pvpSessions = new ConcurrentHashMap<>();
     private static final ConcurrentLinkedQueue<Integer> waitingPlayers = new ConcurrentLinkedQueue<>();
     private static final Logger logger = Logger.getLogger(Server.class.getName());
+    private static final ConcurrentHashMap<Integer, ClientHandler> clientHandlers = new ConcurrentHashMap<>();
 
     static {
         try {
@@ -40,7 +41,9 @@ public class Server {
                 logger.info("Połączono z klientem: " + clientSocket.getInetAddress());
 
                 int clientId = clientCounter.getAndIncrement();
-                threadPool.submit(new ClientHandler(clientSocket, clientId));
+                ClientHandler clientHandler = new ClientHandler(clientSocket, clientId);
+                clientHandlers.put(clientId, clientHandler); // Zapisz obiekt ClientHandler w mapie
+                threadPool.submit(clientHandler);
             }
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Błąd główny serwera", e);
@@ -114,36 +117,85 @@ public class Server {
         private void handleGamePvp(String message, PrintWriter out) {
             if (message.startsWith("START_PVP")) {
                 synchronized (waitingPlayers) {
-                    System.out.println("Gracz " + clientId + " wysłał START_PVP.");
-
                     Integer opponentId = waitingPlayers.poll();
                     if (opponentId == null) {
+                        // Jeśli nie ma przeciwnika, dodaj klienta do kolejki
                         waitingPlayers.add(clientId);
+                        logger.info("Gracz " + clientId + " dodany do kolejki oczekujących.");
                         out.println("Czekam na drugiego gracza...");
-                        System.out.println("Gracz " + clientId + " dodany do kolejki oczekujących.");
                     } else {
-                        // Match with opponent
-                        System.out.println("Gracz " + clientId + " połączony z graczem " + opponentId);
+                        // Gdy znajdzie się przeciwnik, stwórz sesję PvP między dwoma graczami
+                        logger.info("Gracz " + clientId + " połączony z graczem " + opponentId + ".");
+                        GameSessionPvP session = new GameSessionPvP(clientId, opponentId);
 
-                        gameSessionPvp = new GameSessionPvP(clientId, opponentId);
-                        pvpSessions.put(clientId, gameSessionPvp);
-                        pvpSessions.put(opponentId, gameSessionPvp);
+                        // Zapisz sesję PvP w mapie
+                        pvpSessions.put(clientId, session);
+                        pvpSessions.put(opponentId, session);
 
+                        // Pobierz ClientHandler dla przeciwnika i przypisz sesję PvP
+                        ClientHandler opponentHandler = Server.getClientHandler(opponentId);
+                        if (opponentHandler != null) {
+                            opponentHandler.setGameSessionPvp(session); // Przypisz sesję PvP do przeciwnika
+                        }
+
+                        // Przypisz sesję PvP do obecnego klienta
+                        this.gameSessionPvp = session;
+
+                        // Wyślij komunikaty do obu graczy
                         sendMessageToPlayer(clientId, "Połączono z przeciwnikiem! Gra PvP rozpoczęta.");
                         sendMessageToPlayer(opponentId, "Połączono z przeciwnikiem! Gra PvP rozpoczęta.");
 
+                        // Ustal, który gracz zaczyna
                         sendMessageToPlayer(clientId, "YOUR_TURN");
                         sendMessageToPlayer(opponentId, "ENEMY_TURN");
                     }
                 }
             } else if (message.startsWith("PLAYER_MOVE_PVP:")) {
-                if (gameSessionPvp != null) {
+                if (gameSessionPvp == null) {
+                    logger.warning("Brak sesji PvP dla klienta " + clientId);
+                    out.println("Nie jesteś w żadnej grze PvP!");
+                } else {
                     int position = Integer.parseInt(message.substring("PLAYER_MOVE_PVP:".length()));
+                    logger.info("Gracz " + clientId + " wykonuje ruch na pozycji " + position);
                     gameSessionPvp.handlePlayerMove(clientId, position);
+                }
+            } else if (message.equals("END_GAME_PVP")) {
+                if (gameSessionPvp == null) {
+                    out.println("Nie znajdujesz się w żadnej grze PvP!");
+                    return;
+                }
+
+                // Oznacz gracza jako "wrócił do menu"
+                if (gameSessionPvp.getPlayer1Id() == clientId) {
+                    gameSessionPvp.setPlayer1ReturnedToMenu(true);
+                    logger.info("Gracz " + clientId + " wrócił do menu.");
+                } else if (gameSessionPvp.getPlayer2Id() == clientId) {
+                    gameSessionPvp.setPlayer2ReturnedToMenu(true);
+                    logger.info("Gracz " + clientId + " wrócił do menu.");
+                }
+
+                // Sprawdź, czy obaj gracze wrócili do menu
+                if (gameSessionPvp.haveBothPlayersReturnedToMenu()) {
+                    logger.info("Obaj gracze wrócili do menu. Usuwanie sesji PvP.");
+
+                    // Usuń sesję z mapy PvP
+                    int player1Id = gameSessionPvp.getPlayer1Id();
+                    int player2Id = gameSessionPvp.getPlayer2Id();
+                    pvpSessions.remove(player1Id);
+                    pvpSessions.remove(player2Id);
+
+                    // Powiadom graczy
+                    sendMessageToPlayer(player1Id, "Obaj gracze wrócili do menu. Sesja została zakończona.");
+                    sendMessageToPlayer(player2Id, "Obaj gracze wrócili do menu. Sesja została zakończona.");
+
+                    // Opcjonalnie wyczyść obiekty sesji PvP
+                    gameSessionPvp=null;
+                } else {
+                    // Powiadom gracza, że oczekujemy jeszcze na drugiego
+                    out.println("Oczekuję, aż drugi gracz wróci do menu...");
                 }
             }
         }
-
 
         private void sendMessageToPlayer(int clientId, String message) {
             PrintWriter out = clientOutputs.get(clientId);
@@ -165,13 +217,23 @@ public class Server {
                 clientOutputs.remove(clientId);
                 sessions.remove(clientId);
                 waitingPlayers.remove(clientId);
+                clientHandlers.remove(clientId); // Usunięcie z mapy
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void setGameSessionPvp(GameSessionPvP session) {
+            this.gameSessionPvp = session;
         }
     }
 
     public static PrintWriter getClientOutputStream(int clientId) {
         return clientOutputs.get(clientId);
     }
+
+    public static ClientHandler getClientHandler(int clientId) {
+        return clientHandlers.get(clientId); // Pobierz obiekt ClientHandler z mapy
+    }
+
 }

@@ -26,9 +26,9 @@ public class GameControllerPvP {
     private boolean myTurn = false;
     private Client client;
     private Thread serverListenerThread;
-    private boolean isStarted = false;
     private char mySymbol;
     private char enemySymbol;
+
 
     @FXML
     public void initialize() {
@@ -53,7 +53,7 @@ public class GameControllerPvP {
         int position = getButtonIndex(clickedButton);
 
         if (position != -1 && gameBoard[position] == '-') {
-            gameBoard[position] = mySymbol; // Teraz używamy symbolu przypisanego przez serwer
+            gameBoard[position] = mySymbol; // Ustal aktualny symbol gracza na podstawie logiki
             client.getOut().println("PLAYER_MOVE_PVP:" + position);
             myTurn = false;
         }
@@ -61,14 +61,13 @@ public class GameControllerPvP {
 
     @FXML
     public void switchToMenu(ActionEvent event) throws IOException {
-        client.getOut().println("END_GAME");
+        client.getOut().println("END_GAME_PVP");
 
         if (serverListenerThread != null && serverListenerThread.isAlive()) {
             serverListenerThread.interrupt();
         }
 
         gameOver = false;
-        resetGameState();
 
         Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -200,21 +199,5 @@ public class GameControllerPvP {
         });
     }
 
-    private void resetGameState() {
-        for (int i = 0; i < gameBoard.length; i++) {
-            gameBoard[i] = '-';
-            updateButton(i, '-');
-        }
-        winnerText.setText("");
-        roundText.setText("");
-        waitForPlayerText.setText("Oczekiwanie na przeciwnika...");
-        gameOver = false;
-        myTurn = false;
-    }
 
-    @FXML
-    private void onResetButton(ActionEvent event) {
-        client.getOut().println("RESTART_GAME");
-        resetGameState();
-    }
 }
