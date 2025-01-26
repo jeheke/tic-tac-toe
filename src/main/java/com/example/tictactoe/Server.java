@@ -34,12 +34,13 @@ public class Server {
 
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             logger.info("Serwer nasłuchuje na porcie " + PORT);
+            Database database = new Database();
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 int clientId = clientCounter.getAndIncrement();
                 logger.info("Połączono z klientem: " + clientId);
-                ClientHandler clientHandler = new ClientHandler(clientSocket, clientId);
+                ClientHandler clientHandler = new ClientHandler(clientSocket, clientId, database);
                 clientHandlers.put(clientId, clientHandler);
                 threadPool.submit(clientHandler);
             }
@@ -54,7 +55,7 @@ public class Server {
         private GameSessionBot gameSession;
         private GameSessionPvP gameSessionPvp;
 
-        public ClientHandler(Socket clientSocket, int clientId) {
+        public ClientHandler(Socket clientSocket, int clientId, Database database) {
             this.clientSocket = clientSocket;
             this.clientId = clientId;
         }
@@ -67,13 +68,13 @@ public class Server {
             ) {
                 clientOutputs.put(clientId, out);
                 logger.info("Klient " + clientId + " połączony.");
-                out.println("Witaj na serwerze, Twoje ID to: " + clientId);
 
                 String message;
                 while ((message = in.readLine()) != null) {
-                    logger.info("Otrzymano od klienta " + clientId + ": " + message);
-                    handleGamePvp(message, out);
-                    handleGameBot(message, out);
+                    logger.info("Otrzymano od klienta " + clientId + ": " + message);// Obsługa logowania
+                        handleLogin(message, out);
+                        handleGamePvp(message, out);
+                        handleGameBot(message, out);
                 }
                 logger.info("Połączenie z klientem " + clientId + " zostało zakończone.");
             } catch (IOException e) {
@@ -100,8 +101,6 @@ public class Server {
                 }
             } else if (message.equals("END_GAME")) {
                 endGame(out);
-            } else {
-                out.println("Nieznane polecenie: " + message);
             }
         }
 
@@ -168,6 +167,20 @@ public class Server {
                     out.println("Oczekuję, aż drugi gracz wróci do menu...");
                 }
             }
+        }
+
+        private void handleLogin(String message, PrintWriter out) {
+           if (message.startsWith("LOG_IN:")) {
+               String[] parts = message.split(":");
+               if (parts.length != 3) {
+                   out.println("Błąd: Niepoprawny format logowania. Oczekiwany: LOG_IN:username:password");
+                   return;
+               }
+               logger.info("Sprawdzanie danych logowania...");
+               String username = parts[1];
+               String password = parts[2];
+
+           }
         }
 
         private void sendMessageToPlayer(int clientId, String message) {

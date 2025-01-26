@@ -25,7 +25,7 @@ public class Client extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         instance = this;
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("log-in.fxml"));
         Scene scene = new Scene(loader.load());
         stage.setTitle("Kółko i krzyżyk");
         stage.setScene(scene);

@@ -12,6 +12,7 @@ module com.example.tictactoe {
     requires com.almasb.fxgl.all;
     requires java.desktop;
     requires java.logging;
+    requires java.sql;
 
     opens com.example.tictactoe to javafx.fxml;
     exports com.example.tictactoe;
