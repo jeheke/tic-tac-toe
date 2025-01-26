@@ -170,18 +170,71 @@ public class Server {
         }
 
         private void handleLogin(String message, PrintWriter out) {
-           if (message.startsWith("LOG_IN:")) {
-               String[] parts = message.split(":");
-               if (parts.length != 3) {
-                   out.println("Błąd: Niepoprawny format logowania. Oczekiwany: LOG_IN:username:password");
-                   return;
-               }
-               logger.info("Sprawdzanie danych logowania...");
-               String username = parts[1];
-               String password = parts[2];
+            if (message.startsWith("LOG_IN:")) {
+                String[] parts = message.split(":");
+                if (parts.length != 3) {
+                    out.println("Błąd: Niepoprawny format logowania. Oczekiwany: LOG_IN:username:password");
+                    return;
+                }
 
-           }
+                String username = parts[1];
+                String password = parts[2];
+
+                Database database = new Database();
+
+                if (database.validateLogin(username, password)) {
+                    out.println("OK");
+                } else {
+                    out.println("FAILED");
+                }
+
+                database.closeConnection();
+            }
+
+            if (message.startsWith("SIGN_IN:")) {
+                String[] parts = message.split(":");
+                if (parts.length != 3) {
+                    out.println("Błąd: Niepoprawny format rejestracji. Oczekiwany: SIGN_IN:username:password");
+                    return;
+                }
+
+                String username = parts[1];
+                String password = parts[2];
+
+                Database database = new Database();
+
+                if (database.createAccount(username, password)) {
+                    out.println("OK");
+                } else {
+                    out.println("FAILED");
+                }
+
+                database.closeConnection();
+            }
+
+            if (message.startsWith("CHANGE_PASSWORD:")) {
+                String[] parts = message.split(":");
+                if (parts.length != 4) {
+                    out.println("Błąd: Niepoprawny format zmiany hasła. Oczekiwany: CHANGE_PASSWORD:username:old_password:new_password");
+                    return;
+                }
+
+                String username = parts[1];
+                String oldPassword = parts[2];
+                String newPassword = parts[3];
+
+                Database database = new Database();
+
+                if (database.changePassword(username, oldPassword, newPassword)) {
+                    out.println("OK");
+                } else {
+                    out.println("FAILED");
+                }
+
+                database.closeConnection();
+            }
         }
+
 
         private void sendMessageToPlayer(int clientId, String message) {
             PrintWriter out = clientOutputs.get(clientId);
