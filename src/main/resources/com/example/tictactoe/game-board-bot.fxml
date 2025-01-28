@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactoe.GameControllerBot">
+    <children>
+        <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../../images/image2.png" />
+            </image>
+        </ImageView>
+        <FlowPane fx:id="gameBoardPane" alignment="CENTER" layoutX="251.0" layoutY="151.0" prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #C3B091;">
+            <children>
+                <Button fx:id="button00" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button01" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button02" layoutX="60.0" layoutY="110.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button10" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button11" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button12" layoutX="110.0" layoutY="60.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button20" layoutX="210.0" layoutY="60.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button21" layoutX="210.0" layoutY="110.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+                <Button fx:id="button22" layoutX="110.0" layoutY="110.0" mnemonicParsing="false" onAction="#buttonClicked" prefHeight="100.0" prefWidth="100.0" style="-fx-background-color: #C3B091;">
+                    <font>
+                        <Font name="System Bold" size="45.0" />
+                    </font>
+                    <effect>
+                        <DropShadow />
+                    </effect></Button>
+            </children>
+            <effect>
+                <DropShadow />
+            </effect>
+        </FlowPane>
+        <Text fx:id="winnerText" accessibleText="winnerText" layoutX="216.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Kółko i krzyżyk" textAlignment="CENTER" wrappingWidth="367.13671875">
+            <font>
+                <Font name="System Bold" size="48.0" />
+            </font>
+            <effect>
+                <Glow />
+            </effect>
+        </Text>
+        <Button layoutX="451.0" layoutY="504.0" mnemonicParsing="false" onAction="#switchToMenu" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #C3B091;" text="Menu">
+            <effect>
+                <InnerShadow />
+            </effect></Button>
+        <Button layoutX="251.0" layoutY="504.0" mnemonicParsing="false" onAction="#onResetButton" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #C3B091;" text="Restart">
+            <effect>
+                <InnerShadow />
+            </effect></Button>
+    </children>
+</AnchorPane>
