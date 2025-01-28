@@ -79,6 +79,12 @@ public class Server {
             this.clientId = clientId;
         }
 
+        /**
+         * Metoda uruchamiana w oddzielnym wątku, która obsługuje komunikację z klientem.
+         * Odbiera i przetwarza wiadomości wysyłane przez klienta, takie jak logowanie,
+         * rozpoczęcie gry PvP lub gry z botem. Dodatkowo zarządza cyklem życia połączenia,
+         * zapisuje klienta w odpowiednich strukturach danych serwera i obsługuje jego odłączenie.
+         */
         @Override
         public void run() {
             try (
