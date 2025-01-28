@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.example.tictactoe","l":"com.example.tictactoe"}];updateSearchResults();
