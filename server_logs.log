@@ -1560,3 +1560,179 @@ sty 26, 2025 2:09:57 PM com.example.tictactoe.Server$ClientHandler endGame
 INFO: Klient 1 zakończył grę.
 sty 26, 2025 2:09:57 PM com.example.tictactoe.Server$ClientHandler run
 INFO: Połączenie z klientem 1 zostało zakończone.
+sty 27, 2025 10:20:45 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 10:21:30 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 27, 2025 10:21:30 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 27, 2025 10:22:05 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 10:24:07 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 27, 2025 10:24:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 27, 2025 10:24:37 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:blabla:123
+sty 27, 2025 10:26:16 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:10:13 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:12:38 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:12:58 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 27, 2025 11:12:59 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 27, 2025 11:13:20 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:Sebix:123
+sty 27, 2025 11:14:25 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:Sebix:123
+sty 27, 2025 11:15:46 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 2
+sty 27, 2025 11:15:46 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 2 połączony.
+sty 27, 2025 11:16:06 PM com.example.tictactoe.Server$ClientHandler run
+WARNING: Błąd połączenia z klientem 2
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:318)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:1116)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1103)
+	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:350)
+	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:393)
+	at java.base/sun.nio.cs.StreamDecoder.lockedRead(StreamDecoder.java:217)
+	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:171)
+	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:190)
+	at java.base/java.io.BufferedReader.fill(BufferedReader.java:160)
+	at java.base/java.io.BufferedReader.implReadLine(BufferedReader.java:370)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:347)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:436)
+	at com.example.tictactoe/com.example.tictactoe.Server$ClientHandler.run(Server.java:73)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:317)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at --- Async.Stack.Trace --- (captured by IntelliJ IDEA debugger)
+	at java.base/java.util.concurrent.FutureTask.<init>(FutureTask.java:151)
+	at java.base/java.util.concurrent.AbstractExecutorService.newTaskFor(AbstractExecutorService.java:98)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:123)
+	at com.example.tictactoe/com.example.tictactoe.Server.main(Server.java:45)
+
+sty 27, 2025 11:16:14 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:Sebix:123
+sty 27, 2025 11:16:16 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:Sebix:123
+sty 27, 2025 11:16:27 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:Sebix:123
+sty 27, 2025 11:16:34 PM com.example.tictactoe.Server$ClientHandler run
+WARNING: Błąd połączenia z klientem 1
+java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:318)
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:346)
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:796)
+	at java.base/java.net.Socket$SocketInputStream.implRead(Socket.java:1116)
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1103)
+	at java.base/sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:350)
+	at java.base/sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:393)
+	at java.base/sun.nio.cs.StreamDecoder.lockedRead(StreamDecoder.java:217)
+	at java.base/sun.nio.cs.StreamDecoder.read(StreamDecoder.java:171)
+	at java.base/java.io.InputStreamReader.read(InputStreamReader.java:190)
+	at java.base/java.io.BufferedReader.fill(BufferedReader.java:160)
+	at java.base/java.io.BufferedReader.implReadLine(BufferedReader.java:370)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:347)
+	at java.base/java.io.BufferedReader.readLine(BufferedReader.java:436)
+	at com.example.tictactoe/com.example.tictactoe.Server$ClientHandler.run(Server.java:73)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.run$$$capture(FutureTask.java:317)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java)
+	at --- Async.Stack.Trace --- (captured by IntelliJ IDEA debugger)
+	at java.base/java.util.concurrent.FutureTask.<init>(FutureTask.java:151)
+	at java.base/java.util.concurrent.AbstractExecutorService.newTaskFor(AbstractExecutorService.java:98)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:123)
+	at com.example.tictactoe/com.example.tictactoe.Server.main(Server.java:45)
+
+sty 27, 2025 11:16:45 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 3
+sty 27, 2025 11:16:45 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 3 połączony.
+sty 27, 2025 11:16:55 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: SIGN_IN:Sebix :123
+sty 27, 2025 11:18:02 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: LOG_IN:Sebix:123
+sty 27, 2025 11:19:21 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: SIGN_IN:Sebix:123
+sty 27, 2025 11:19:58 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: SIGN_IN:sebix:123
+sty 27, 2025 11:20:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 3: END_GAME
+sty 27, 2025 11:20:00 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 3 zakończył grę.
+sty 27, 2025 11:20:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 3 zostało zakończone.
+sty 27, 2025 11:22:04 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 4
+sty 27, 2025 11:22:05 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 4 połączony.
+sty 27, 2025 11:22:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 4: LOG_IN:SEBIX:123
+sty 27, 2025 11:26:20 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:27:01 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:29:20 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:32:50 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:34:12 PM com.example.tictactoe.Server main
+INFO: Serwer nasłuchuje na porcie 12345
+sty 27, 2025 11:34:28 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 1
+sty 27, 2025 11:34:28 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 1 połączony.
+sty 27, 2025 11:34:38 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SIGN_IN:sebix:123
+sty 27, 2025 11:35:52 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: LOG_IN:Sebix:123
+sty 27, 2025 11:35:58 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: LOG_IN:sebix:123
+sty 27, 2025 11:36:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: SET_DIFFICULTY:Normalny
+sty 27, 2025 11:36:07 PM com.example.tictactoe.Server$ClientHandler handleGameBot
+INFO: Ustawiono Normalny poziom trudności dla Gracza 1
+sty 27, 2025 11:36:08 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:4
+sty 27, 2025 11:36:09 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:0
+sty 27, 2025 11:36:10 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:6
+sty 27, 2025 11:36:11 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: PLAYER_MOVE:2
+sty 27, 2025 11:36:12 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 27, 2025 11:36:12 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 27, 2025 11:37:00 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: START_PVP
+sty 27, 2025 11:37:00 PM com.example.tictactoe.Server$ClientHandler handleGamePvp
+INFO: Gracz 1 dodany do kolejki oczekujących.
+sty 27, 2025 11:38:33 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME_PVP
+sty 27, 2025 11:38:50 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 1: END_GAME
+sty 27, 2025 11:38:50 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 1 zakończył grę.
+sty 27, 2025 11:38:50 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 1 zostało zakończone.
+sty 27, 2025 11:39:18 PM com.example.tictactoe.Server main
+INFO: Połączono z klientem: 2
+sty 27, 2025 11:39:18 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Klient 2 połączony.
+sty 27, 2025 11:40:32 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: CHANGE_PASSWORD:sebix:123:12
+sty 27, 2025 11:41:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Otrzymano od klienta 2: END_GAME
+sty 27, 2025 11:41:07 PM com.example.tictactoe.Server$ClientHandler endGame
+INFO: Klient 2 zakończył grę.
+sty 27, 2025 11:41:07 PM com.example.tictactoe.Server$ClientHandler run
+INFO: Połączenie z klientem 2 zostało zakończone.

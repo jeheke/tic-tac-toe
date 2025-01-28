@@ -17,7 +17,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * Klasa {@code AccountController} obsługuje interakcje użytkownika związane z zarządzaniem kontem,
+ * w tym logowanie, rejestrację, zmianę hasła oraz nawigację między ekranami aplikacji.
+ * Klasa komunikuje się z serwerem w celu wykonywania operacji takich jak autoryzacja
+ * czy rejestracja użytkownika.
+ */
 public class AccountController {
+
     @FXML
     private PasswordField password;
     @FXML
@@ -38,15 +45,31 @@ public class AccountController {
     private Stage stage;
     private Scene scene;
 
+    /**
+     * Wczytuje plik FXML i zwraca jego korzeń jako obiekt {@link Parent}.
+     *
+     * @param fxmlFile nazwa pliku FXML do wczytania.
+     * @return korzeń pliku FXML jako obiekt {@link Parent}.
+     * @throws IOException jeśli plik nie może zostać wczytany.
+     */
     private Parent loadFXML(String fxmlFile) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         return loader.load();
     }
 
+    /**
+     * Inicjalizuje kontroler. Metoda jest automatycznie wywoływana po wczytaniu pliku FXML.
+     */
     @FXML
     private void initialize() {
     }
 
+    /**
+     * Obsługuje proces logowania, wysyłając wprowadzone dane logowania do serwera
+     * i odbierając odpowiedź.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez kliknięcie przycisku "Zaloguj się".
+     */
     @FXML
     public void logIn(ActionEvent event) {
         String login1 = login.getText();
@@ -84,6 +107,12 @@ public class AccountController {
         }
     }
 
+    /**
+     * Obsługuje proces rejestracji użytkownika, wysyłając wprowadzone dane rejestracyjne
+     * do serwera i odbierając odpowiedź.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez kliknięcie przycisku "Zarejestruj się".
+     */
     @FXML
     public void signUp(ActionEvent event) {
         String login1 = login.getText();
@@ -127,6 +156,12 @@ public class AccountController {
         }
     }
 
+    /**
+     * Obsługuje proces zmiany hasła, wysyłając stare i nowe hasło do serwera
+     * i odbierając odpowiedź.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez kliknięcie przycisku "Zmień hasło".
+     */
     @FXML
     public void changePassword(ActionEvent event) {
         String login1 = login.getText();
@@ -165,7 +200,9 @@ public class AccountController {
         }
     }
 
-    // Zmiana widoczności hasła
+    /**
+     * Przełącza widoczność hasła między polem tekstowym a polem hasła.
+     */
     @FXML
     private void togglePasswordVisibility() {
         if (password.isVisible()) {
@@ -179,7 +216,12 @@ public class AccountController {
         }
     }
 
-    // Przełączenie na menu główne
+    /**
+     * Przełącza widok na menu główne.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez zdarzenie związane z nawigacją.
+     * @throws IOException jeśli plik FXML nie może zostać wczytany.
+     */
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = loadFXML("main-menu.fxml");
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -188,7 +230,12 @@ public class AccountController {
         stage.show();
     }
 
-    // Przełączenie na ekran zmiany hasła
+    /**
+     * Przełącza widok na ekran zmiany hasła.
+     *
+     * @param event obiekt {@link MouseEvent} wywołany przez zdarzenie związane z nawigacją.
+     * @throws IOException jeśli plik FXML nie może zostać wczytany.
+     */
     @FXML
     public void switchToPasswordChange(MouseEvent event) throws IOException {
         Parent root = loadFXML("change-password.fxml");
@@ -198,7 +245,12 @@ public class AccountController {
         stage.show();
     }
 
-    // Przełączenie na ekran rejestracji
+    /**
+     * Przełącza widok na ekran rejestracji.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez zdarzenie związane z nawigacją.
+     * @throws IOException jeśli plik FXML nie może zostać wczytany.
+     */
     @FXML
     public void switchToSignIn(ActionEvent event) throws IOException {
         Parent root = loadFXML("sign-in.fxml");
@@ -208,7 +260,12 @@ public class AccountController {
         stage.show();
     }
 
-    // Przełączenie na ekran logowania
+    /**
+     * Przełącza widok na ekran logowania.
+     *
+     * @param event obiekt {@link ActionEvent} wywołany przez zdarzenie związane z nawigacją.
+     * @throws IOException jeśli plik FXML nie może zostać wczytany.
+     */
     @FXML
     public void switchToLogIn(ActionEvent event) throws IOException {
         Parent root = loadFXML("log-in.fxml");

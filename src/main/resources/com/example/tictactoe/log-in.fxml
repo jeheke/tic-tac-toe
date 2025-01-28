@@ -4,42 +4,78 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tictactoe.AccountController">
    <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../images/image3.png" />
+         </image>
+      </ImageView>
       <Text layoutX="100.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zaloguj się na konto." textAlignment="CENTER" wrappingWidth="608.13671875">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="46.0" />
          </font>
+         <effect>
+            <Glow />
+         </effect>
       </Text>
       <Text layoutX="250.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login:" wrappingWidth="70.13671875">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Text>
       <Text layoutX="250.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hasło:">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Text>
-      <PasswordField fx:id="password" layoutX="250.0" layoutY="325.0" prefHeight="30.0" prefWidth="300.0" promptText="Twoje hasło" />
+      <PasswordField fx:id="password" layoutX="250.0" layoutY="325.0" prefHeight="30.0" prefWidth="300.0" promptText="Twoje hasło">
+         <effect>
+            <InnerShadow />
+         </effect></PasswordField>
       <TextField fx:id="passwordVisible" layoutX="250.0" layoutY="325.0" prefHeight="30.0" prefWidth="300.0" promptText="Twoje hasło" visible="false" /> <!-- Pole do pokazywania hasła -->
-      <TextField fx:id="login" layoutX="250.0" layoutY="250.0" prefHeight="30.0" prefWidth="300.0" promptText="Twoja nazwa użytkownika" />
+      <TextField fx:id="login" layoutX="250.0" layoutY="250.0" prefHeight="30.0" prefWidth="300.0" promptText="Twoja nazwa użytkownika">
+         <effect>
+            <InnerShadow />
+         </effect></TextField>
       <Button fx:id="logIn" layoutX="270.0" layoutY="390.0" mnemonicParsing="false" onAction="#logIn" prefHeight="30.0" prefWidth="100.0" text="Zaloguj">
          <font>
             <Font size="14.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
-      <Label fx:id="forgotPassword" layoutX="444.0" layoutY="361.0" onMouseClicked="#switchToPasswordChange" text="Nie pamiętam hasła" textFill="#4568f5" />
+      <Label fx:id="forgotPassword" layoutX="480.0" layoutY="362.0" onMouseClicked="#switchToPasswordChange" text="Zmiana hasła" textAlignment="RIGHT" textFill="#4568f5">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <Button fx:id="signIn" layoutX="430.0" layoutY="390.0" mnemonicParsing="false" onAction="#switchToSignIn" prefHeight="30.0" prefWidth="100.0" text="Załóż konto">
          <font>
             <Font size="14.0" />
          </font>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Button>
-      <Button fx:id="togglePassword" layoutX="560.0" layoutY="325.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" text="👁️" />
+      <Button fx:id="togglePassword" layoutX="560.0" layoutY="325.0" mnemonicParsing="false" onAction="#togglePasswordVisibility" text="👁️">
+         <effect>
+            <InnerShadow />
+         </effect></Button>
       <Text fx:id="errorText" fill="RED" layoutX="100.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="608.13671875">
          <font>
             <Font size="24.0" />

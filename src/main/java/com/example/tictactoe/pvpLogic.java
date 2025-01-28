@@ -2,6 +2,7 @@ package com.example.tictactoe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,58 +10,48 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 
-
+/**
+ * Klasa pvpLogic implementuje logikę gry Kółko i Krzyżyk w trybie Player vs Player (PvP)
+ * z wykorzystaniem biblioteki JavaFX.
+ */
 public class pvpLogic implements Initializable {
-    @FXML
-    private Button button00;
 
     @FXML
-    private Button button01;
-
-    @FXML
-    private Button button02;
-
-    @FXML
-    private Button button10;
-
-    @FXML
-    private Button button11;
-
-    @FXML
-    private Button button12;
-
-    @FXML
-    private Button button20;
-
-    @FXML
-    private Button button21;
-
-    @FXML
-    private Button button22;
+    private Button button00, button01, button02, button10, button11, button12, button20, button21, button22;
 
     @FXML
     private Text winnerText;
 
     private int playerTurn = 0;
-    ArrayList<Button> buttons;
+    private ArrayList<Button> buttons;
 
+    /**
+     * Metoda initialize inicjalizuje komponenty widoku i przygotowuje przyciski do gry.
+     *
+     * @param url URL zasobu używanego do lokalizacji widoku FXML.
+     * @param resource Zasoby lokalizacyjne dla widoku FXML.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resource) {
-        buttons = new ArrayList<>(Arrays.asList(button00,button01,button02,button10,button11,button12,button20,button21,button22));
+        buttons = new ArrayList<>(Arrays.asList(button00, button01, button02, button10, button11, button12, button20, button21, button22));
         buttons.forEach(button -> {
             setupButton(button);
             button.setFocusTraversable(false);
         });
     }
 
+    /**
+     * Metoda restart resetuje grę i pozwala rozpocząć ją od nowa.
+     *
+     * @param event Zdarzenie związane z kliknięciem przycisku "Restart".
+     */
     @FXML
     void restart(ActionEvent event) {
         buttons.forEach(this::resetButton);
@@ -68,11 +59,21 @@ public class pvpLogic implements Initializable {
         playerTurn = 0;
     }
 
+    /**
+     * Resetuje stan pojedynczego przycisku, umożliwiając ponowne jego użycie.
+     *
+     * @param button Przycisk do zresetowania.
+     */
     public void resetButton(Button button) {
         button.setDisable(false);
         button.setText("");
     }
 
+    /**
+     * Konfiguruje pojedynczy przycisk, przypisując mu odpowiednie zdarzenia.
+     *
+     * @param button Przycisk do konfiguracji.
+     */
     private void setupButton(Button button) {
         button.setOnMouseClicked(event -> {
             setPlayerSymbol(button);
@@ -81,6 +82,11 @@ public class pvpLogic implements Initializable {
         });
     }
 
+    /**
+     * Ustawia symbol gracza (X lub O) na klikniętym przycisku.
+     *
+     * @param button Przycisk, który został kliknięty.
+     */
     public void setPlayerSymbol(Button button) {
         if (playerTurn % 2 == 0) {
             button.setText("X");
@@ -93,6 +99,10 @@ public class pvpLogic implements Initializable {
         }
     }
 
+    /**
+     * Sprawdza warunki zwycięstwa i remis w grze.
+     * W przypadku wygranej lub remisu wyłącza wszystkie przyciski.
+     */
     public void checkWinCondition() {
         for (int i = 0; i < 8; i++) {
             String check = switch (i) {
@@ -107,16 +117,15 @@ public class pvpLogic implements Initializable {
                 default -> null;
             };
 
-            if (check.equals("XXX")) {
+            if ("XXX".equals(check)) {
                 winnerText.setText("Wygrał krzyżyk");
                 disableAllButtons();
                 return;
-            } else if (check.equals("OOO")) {
+            } else if ("OOO".equals(check)) {
                 winnerText.setText("Wygrało kółko");
                 disableAllButtons();
                 return;
             }
-
         }
 
         boolean isDraw = buttons.stream().allMatch(button -> !button.getText().isEmpty());
@@ -124,15 +133,22 @@ public class pvpLogic implements Initializable {
             winnerText.setText("Remis");
             disableAllButtons();
         }
-
     }
 
+    /**
+     * Wyłącza wszystkie przyciski w przypadku zakończenia gry.
+     */
     private void disableAllButtons() {
         buttons.forEach(button -> button.setDisable(true));
         buttons.forEach(button -> button.setStyle("-fx-opacity: 1; -fx-background-color: #C3B091;"));
     }
 
-
+    /**
+     * Przełącza widok do menu głównego aplikacji.
+     *
+     * @param event Zdarzenie związane z kliknięciem przycisku "Menu".
+     * @throws IOException W przypadku błędu podczas ładowania pliku FXML.
+     */
     @FXML
     public void switchToMenu(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));

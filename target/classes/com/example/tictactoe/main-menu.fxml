@@ -36,30 +36,15 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToMode" prefHeight="56.0" prefWidth="210.0" style="-fx-background-color: #C3B091;" text="Graj">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <InnerShadow />
-                     </effect>
-                  </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToScoreboard" prefHeight="56.0" prefWidth="210.0" style="-fx-background-color: #C3B091;" text="Tabela Wyników">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <effect>
-                        <InnerShadow />
-                     </effect>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToMode" prefHeight="56.0" prefWidth="210.0" style="-fx-background-color: #C3B091;" text="Graj">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Button>
             <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0">
                <children>
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#exit" prefHeight="56.0" prefWidth="210.0" style="-fx-background-color: #C3B091;" text="Wyjdź">
@@ -72,6 +57,7 @@
                   </Button>
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="56.0" prefWidth="800.0" />
          </children>
       </VBox>
    </children>

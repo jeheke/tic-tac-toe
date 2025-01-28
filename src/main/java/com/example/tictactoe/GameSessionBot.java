@@ -3,6 +3,9 @@ package com.example.tictactoe;
 import java.io.PrintWriter;
 import java.util.Random;
 
+/**
+ * Klasa obsługująca sesję gry z botem.
+ */
 public class GameSessionBot {
     private int playerTurn = 0;
     private char[] gameBoard = new char[9];
@@ -10,7 +13,12 @@ public class GameSessionBot {
     private int clientId;
     private boolean gameOver = false;
 
-
+    /**
+     * Konstruktor sesji gry z botem.
+     *
+     * @param difficulty Poziom trudności gry ("Łatwy" lub "Trudny").
+     * @param clientId   Identyfikator klienta.
+     */
     public GameSessionBot(String difficulty, int clientId) {
         this.difficulty = difficulty;
         this.clientId = clientId;
@@ -22,6 +30,11 @@ public class GameSessionBot {
         System.out.println("Stworzono nową sesję gry dla Gracza " + clientId + " na poziomie trudności: " + difficulty);
     }
 
+    /**
+     * Obsługuje ruch gracza.
+     *
+     * @param position Pozycja, na którą gracz wykonał ruch.
+     */
     public void handlePlayerMove(int position) {
         if (gameOver || gameBoard[position] != '-') {
             return;
@@ -36,6 +49,9 @@ public class GameSessionBot {
         }
     }
 
+    /**
+     * Wykonuje ruch bota.
+     */
     private void botMove() {
         int move = -1;
 
@@ -54,6 +70,11 @@ public class GameSessionBot {
         }
     }
 
+    /**
+     * Znajduje najlepszy możliwy ruch dla bota w trybie "Trudny".
+     *
+     * @return Indeks najlepszego ruchu lub -1, jeśli brak możliwych ruchów.
+     */
     private int findBestMove() {
         for (int i = 0; i < gameBoard.length; i++) {
             if (gameBoard[i] == '-') {
@@ -78,6 +99,11 @@ public class GameSessionBot {
         return -1;
     }
 
+    /**
+     * Wybiera losowy ruch dla bota.
+     *
+     * @return Indeks losowego ruchu.
+     */
     private int findRandomMove() {
         Random random = new Random();
         int move;
@@ -87,6 +113,9 @@ public class GameSessionBot {
         return move;
     }
 
+    /**
+     * Sprawdza stan gry po każdym ruchu.
+     */
     private void checkGameState() {
         if (checkWin('X')) {
             sendToClient("GAME_OVER:Wygrałeś!");
@@ -100,6 +129,12 @@ public class GameSessionBot {
         }
     }
 
+    /**
+     * Sprawdza, czy podany symbol spełnia warunki zwycięstwa.
+     *
+     * @param symbol Symbol do sprawdzenia ('X' lub 'O').
+     * @return {@code true}, jeśli warunki zwycięstwa są spełnione; {@code false} w przeciwnym wypadku.
+     */
     private boolean checkWin(char symbol) {
         int[][] winConditions = {
                 {0, 1, 2}, {3, 4, 5}, {6, 7, 8},
@@ -117,6 +152,11 @@ public class GameSessionBot {
         return false;
     }
 
+    /**
+     * Sprawdza, czy plansza jest pełna.
+     *
+     * @return {@code true}, jeśli plansza jest pełna; {@code false} w przeciwnym wypadku.
+     */
     private boolean isBoardFull() {
         for (char c : gameBoard) {
             if (c == '-') {
@@ -126,6 +166,11 @@ public class GameSessionBot {
         return true;
     }
 
+    /**
+     * Wysyła wiadomość do klienta.
+     *
+     * @param message Treść wiadomości.
+     */
     private void sendToClient(String message) {
         try {
             PrintWriter out = Server.getClientOutputStream(clientId);
@@ -137,6 +182,9 @@ public class GameSessionBot {
         }
     }
 
+    /**
+     * Resetuje stan gry, umożliwiając rozpoczęcie nowej rundy.
+     */
     public void restart() {
         gameOver = false;
         playerTurn = 0;

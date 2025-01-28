@@ -15,60 +15,84 @@ import javafx.stage.WindowEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+/**
+ * Kontroler gry PvP (Player vs Player) w grze kółko i krzyżyk
+ * Obsługuje logikę gry, interakcje z serwerem oraz zarządza interfejsem użytkownika.
+ */
 public class GameControllerPvP {
     @FXML
     private Button button00, button01, button02, button10, button11, button12, button20, button21, button22;
     @FXML
     private Text winnerText, roundText, waitForPlayerText;
 
-    private char[] gameBoard = new char[9];
-    private boolean gameOver = false;
-    private boolean myTurn = false;
-    private Client client;
-    private Thread serverListenerThread;
-    private char mySymbol;
-    private char enemySymbol;
+    private char[] gameBoard = new char[9]; // Tablica przechowująca stan planszy gry
+    private boolean gameOver = false; // Flaga informująca, czy gra zakończona
+    private boolean myTurn = false; // Flaga informująca, czy to moja tura
+    private Client client; // Obiekt klienta komunikującego się z serwerem
+    private Thread serverListenerThread; // Wątek nasłuchujący komunikaty z serwera
+    private char mySymbol; // Mój symbol (X lub O)
+    private char enemySymbol; // Symbol przeciwnika
 
-
+    /**
+     * Inicjalizuje grę i rozpoczyna nasłuchiwanie serwera.
+     * Ustawia początkowy stan gry.
+     */
     @FXML
     public void initialize() {
         client = Client.getInstance();
-        startListeningToServer();
+        startListeningToServer(); // Rozpocznij nasłuchiwanie serwera
 
+        // Ustawienie początkowego stanu planszy
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i] = '-';
         }
 
+        // Ustawienie komunikatu oczekiwania na przeciwnika
         waitForPlayerText.setText("Oczekiwanie na przeciwnika...");
         roundText.setText("");
     }
 
+    /**
+     * Obsługuje kliknięcie przycisku na planszy.
+     * Wykonuje ruch, jeśli to moja tura i gra nie jest zakończona.
+     *
+     * @param event Zdarzenie kliknięcia przycisku
+     */
     @FXML
     public void buttonClicked(ActionEvent event) {
         if (gameOver || !myTurn) {
-            return;
+            return; // Ignoruj kliknięcia, jeśli gra jest zakończona lub nie moja tura
         }
 
         Button clickedButton = (Button) event.getSource();
-        int position = getButtonIndex(clickedButton);
+        int position = getButtonIndex(clickedButton); // Pobierz indeks klikniętego przycisku
 
         if (position != -1 && gameBoard[position] == '-') {
-            gameBoard[position] = mySymbol;
-            client.getOut().println("PLAYER_MOVE_PVP:" + position);
-            myTurn = false;
+            gameBoard[position] = mySymbol; // Zaktualizuj stan planszy
+            client.getOut().println("PLAYER_MOVE_PVP:" + position); // Wyślij ruch do serwera
+            myTurn = false; // Zmiana tury
         }
     }
 
+    /**
+     * Przełącza do menu głównego po zakończeniu gry.
+     * Kończy nasłuchiwanie serwera i resetuje stan gry.
+     *
+     * @param event Zdarzenie kliknięcia przycisku powrotu do menu
+     * @throws IOException W przypadku błędu przy ładowaniu widoku
+     */
     @FXML
     public void switchToMenu(ActionEvent event) throws IOException {
-        client.getOut().println("END_GAME_PVP");
+        client.getOut().println("END_GAME_PVP"); // Powiadomienie serwera o zakończeniu gry
 
+        // Zatrzymaj wątek nasłuchujący serwera, jeśli jest aktywny
         if (serverListenerThread != null && serverListenerThread.isAlive()) {
             serverListenerThread.interrupt();
         }
 
-        gameOver = false;
+        gameOver = false; // Zresetuj stan gry
 
+        // Przeładuj widok menu głównego
         Parent root = FXMLLoader.load(getClass().getResource("main-menu.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -76,37 +100,38 @@ public class GameControllerPvP {
         stage.show();
     }
 
+    /**
+     * Rozpoczyna nasłuchiwanie wiadomości z serwera w nowym wątku.
+     * Aktualizuje stan gry na podstawie otrzymanych komunikatów.
+     */
     private void startListeningToServer() {
         serverListenerThread = new Thread(() -> {
             try {
                 BufferedReader in = client.getInReader();
                 String serverMessage;
                 while (!Thread.currentThread().isInterrupted() && (serverMessage = in.readLine()) != null) {
+                    // Przetwarzanie wiadomości z serwera
                     if (serverMessage.startsWith("UPDATE_BOARD_PVP:")) {
                         String boardState = serverMessage.substring("UPDATE_BOARD_PVP:".length());
-                        updateGameBoard(boardState);
+                        updateGameBoard(boardState); // Zaktualizuj stan planszy
                     } else if (serverMessage.startsWith("GAME_OVER_PVP:")) {
                         String result = serverMessage.substring("GAME_OVER_PVP:".length());
-                        updateWinnerText(result);
-                        gameOver = true;
+                        updateWinnerText(result); // Zaktualizuj wynik gry
+                        gameOver = true; // Ustaw stan zakończenia gry
                         roundText.setText("");
                     } else if (serverMessage.startsWith("GAME_STARTED")) {
-                        updateWaitingText(false);
+                        updateWaitingText(false); // Zaktualizuj komunikat o oczekiwaniu
                         int player = Integer.parseInt(serverMessage.substring("GAME_STARTED:".length()).trim());
-                        if (player == 1) {
-                            myTurn = true;
-                        } else if (player == 2) {
-                            myTurn = false;
-                        }
+                        myTurn = player == 1; // Ustal, kto zaczyna grę
                     } else if (serverMessage.equals("YOUR_TURN")) {
-                            myTurn = true;
-                            roundText.setText("Twoja tura");
+                        myTurn = true; // Moja tura
+                        roundText.setText("Twoja tura");
                     } else if (serverMessage.equals("ENEMY_TURN")) {
-                            myTurn = false;
-                            roundText.setText("Tura przeciwnika");
+                        myTurn = false; // Tura przeciwnika
+                        roundText.setText("Tura przeciwnika");
                     } else if (serverMessage.startsWith("ASSIGN_SYMBOL:")) {
                         mySymbol = serverMessage.charAt("ASSIGN_SYMBOL:".length());
-                        enemySymbol = (mySymbol == 'X') ? 'O' : 'X';
+                        enemySymbol = (mySymbol == 'X') ? 'O' : 'X'; // Przypisanie symboli
                     }
                 }
             } catch (IOException e) {
@@ -118,29 +143,46 @@ public class GameControllerPvP {
         serverListenerThread.start();
     }
 
+    /**
+     * Aktualizuje stan planszy gry na podstawie komunikatu z serwera.
+     *
+     * @param boardState Nowy stan planszy
+     */
     private void updateGameBoard(String boardState) {
         Platform.runLater(() -> {
             for (int i = 0; i < boardState.length(); i++) {
                 gameBoard[i] = boardState.charAt(i);
-                updateButton(i, gameBoard[i]);
+                updateButton(i, gameBoard[i]); // Zaktualizuj przycisk na planszy
             }
         });
     }
 
+    /**
+     * Aktualizuje tekst na przycisku na planszy.
+     *
+     * @param index Indeks przycisku na planszy
+     * @param value Nowa wartość (X, O lub puste)
+     */
     private void updateButton(int index, char value) {
         Button button = getButtonByIndex(index);
         if (button != null) {
             if (value == 'X' || value == 'O') {
-                button.setText(String.valueOf(value));
-                setColor(button, value);
-                button.setDisable(true);
+                button.setText(String.valueOf(value)); // Ustaw tekst na przycisku
+                setColor(button, value); // Ustaw kolor przycisku
+                button.setDisable(true); // Zablokuj przycisk po wykonaniu ruchu
             } else {
-                button.setText("");
-                button.setDisable(false);
+                button.setText(""); // Wyczyść przycisk
+                button.setDisable(false); // Odblokuj przycisk
             }
         }
     }
 
+    /**
+     * Ustawia kolor przycisku w zależności od wartości (X lub O).
+     *
+     * @param button Przycisk, którego kolor ma zostać zmieniony
+     * @param value Wartość (X lub O)
+     */
     private void setColor(Button button, char value) {
         if (value == 'X') {
             button.setStyle("-fx-text-fill: blue; -fx-background-color: #C3B091; -fx-opacity: 1;");
@@ -149,6 +191,12 @@ public class GameControllerPvP {
         }
     }
 
+    /**
+     * Zwraca przycisk odpowiadający danemu indeksowi w tablicy.
+     *
+     * @param index Indeks przycisku
+     * @return Przycisk na planszy
+     */
     private Button getButtonByIndex(int index) {
         return switch (index) {
             case 0 -> button00;
@@ -164,6 +212,12 @@ public class GameControllerPvP {
         };
     }
 
+    /**
+     * Zwraca indeks przycisku na planszy na podstawie obiektu Button.
+     *
+     * @param button Przycisk
+     * @return Indeks przycisku w tablicy
+     */
     private int getButtonIndex(Button button) {
         if (button == button00) return 0;
         if (button == button01) return 1;
@@ -177,21 +231,29 @@ public class GameControllerPvP {
         return -1;
     }
 
+    /**
+     * Aktualizuje tekst informujący o zwycięzcy.
+     *
+     * @param result Wynik gry (zwycięzca lub remis)
+     */
     private void updateWinnerText(String result) {
         Platform.runLater(() -> {
-            winnerText.setText(result);
+            winnerText.setText(result); // Wyświetl wynik
         });
     }
 
+    /**
+     * Aktualizuje tekst informujący o oczekiwaniach.
+     *
+     * @param waiting Flaga informująca, czy oczekujemy na drugiego gracza
+     */
     private void updateWaitingText(boolean waiting) {
         Platform.runLater(() -> {
             if (waiting) {
                 waitForPlayerText.setText("Oczekiwanie na drugiego gracza..");
             } else {
-                waitForPlayerText.setText("");
+                waitForPlayerText.setText(""); // Wyczyść tekst po rozpoczęciu gry
             }
         });
     }
-
-
 }
